@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>dischi</title>
+    <title>dischi2</title>
 </head>
 <body>
     <div id="app">
@@ -14,57 +14,57 @@
         <div class="main">
             <div class="items">            
                 <div class="card" v-for="elemento in cards">
-                    <div class='image'><img :src="elemento.poster"></div>
-                    <div class='title'>{{elemento.title}}</div>
-                    <div class='author'>{{elemento.author}}</div>
-                    <div class='year'>{{elemento.year}}</div>
+                    <div class="image"><img :src="elemento.poster"></div>
+                    <div class="title">{{elemento.title}}</div>
+                    <div class="author">{{elemento.author}}</div>
+                    <div class="year">{{elemento.year}}</div>
                 </div>
             </div>
         </div>
     </div>
     
 
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-    let app = new Vue({ 
-        el: "#app",
-        data: {
-            apiURL: "http://localhost/api.php",
-            cards: [],
-            // input:"",
-        },
-        created(){
-            this.getCards();
-        },
-        // computed: {
-        //     filtrati(){
-        //         return this.cards.filter( (info) => {
-        //             return info.genre.toLowerCase().includes(this.input.toLowerCase());
-        //         });
-        //     }
-        // },
-        methods: {
-            getCards: function(){
-            axios
-                .get(this.apiURL)
-                .then( (risposta) => {
-                    // handle success
-                    this.cards = risposta.data.response;
-                })
-                .catch(function (error) {
-                    // handle error
-                    console.log(error);
-                });
-            },
-            // filtraPerGenere(genereSelected){
-            //     this.input = genereSelected;
-            // },
-        }
-    });
+                        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                        <script>
+                        let app = new Vue({ 
+                            el: "#app",
+                            data: {
+                                apiURL: "http://localhost:8888/repo-php/php-ajax-dischi/milestone2/api.php",
+                                cards: [],
+                                // input:"",
+                            },
+                            created(){
+                                this.getCards();
+                            },
+                            // computed: {
+                            //     filtrati(){
+                            //         return this.cards.filter( (info) => {
+                            //             return info.genre.toLowerCase().includes(this.input.toLowerCase());
+                            //         });
+                            //     }
+                            // },
+                            methods: {
+                                getCards: function(){
+                                axios
+                                    .get(this.apiURL)
+                                    .then( (risposta) => {
+                                        // handle success
+                                        this.cards = risposta.data;
+                                    })
+                                    .catch(function (error) {
+                                        // handle error
+                                        console.log(error);
+                                    });
+                                },
+                                // filtraPerGenere(genereSelected){
+                                //     this.input = genereSelected;
+                                // },
+                            }
+                        });
 
-    Vue.config.devtools = true;
-    </script>
+                        Vue.config.devtools = true;
+                        </script>
 </body>
 </html>
 
