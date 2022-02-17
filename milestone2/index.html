@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dischi</title>
+</head>
+<body>
+    <div id="app">
+        <div class="header">
+            <img src="logo-small.svg" alt="">
+        </div>
+        <div class="main">
+            <div class="items">            
+                <div class="card" v-for="elemento in cards">
+                    <div class='image'><img :src="elemento.poster"></div>
+                    <div class='title'>{{elemento.title}}</div>
+                    <div class='author'>{{elemento.author}}</div>
+                    <div class='year'>{{elemento.year}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    let app = new Vue({ 
+        el: "#app",
+        data: {
+            apiURL: "http://localhost/api.php",
+            cards: [],
+            // input:"",
+        },
+        created(){
+            this.getCards();
+        },
+        // computed: {
+        //     filtrati(){
+        //         return this.cards.filter( (info) => {
+        //             return info.genre.toLowerCase().includes(this.input.toLowerCase());
+        //         });
+        //     }
+        // },
+        methods: {
+            getCards: function(){
+            axios
+                .get(this.apiURL)
+                .then( (risposta) => {
+                    // handle success
+                    this.cards = risposta.data.response;
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                });
+            },
+            // filtraPerGenere(genereSelected){
+            //     this.input = genereSelected;
+            // },
+        }
+    });
+
+    Vue.config.devtools = true;
+    </script>
+</body>
+</html>
+
+
+
+
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .header{
+        height: 60px;
+        background-color: #2D3A46;
+        display: flex;
+        align-items: center;
+    }
+
+    .header img{
+        height: 40px;
+        padding-left: 20px;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+
+    .main{
+        min-height: calc(100vh - 60px);
+        background-color: #1E2D3B;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Roboto' , sans-serif;
+    }
+
+    .items{
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1000px;
+    }
+
+    .card{
+        height: 300px;
+        width: 170px;
+        padding: 20px;
+        text-align: center;
+        margin: 0px 25px 15px 0px;
+        background-color: #2D3A46;
+    }
+
+    .card img{
+        height: 130px;
+        width: 130px;
+    }
+
+    .card .title{
+        color: white;
+        text-transform: uppercase;
+        font-style: bold;
+        margin: 15px 0;
+        font-size: 20px;
+    }
+
+    .card .author, .card .year{
+        color: #7A776F;
+        font-size: 15px;
+    }
+</style>
