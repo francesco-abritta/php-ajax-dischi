@@ -12,7 +12,7 @@
             <img src="logo-small.svg" alt="">
         </div>
         <div class="main">
-            <div class="select">
+            <!-- <div class="select">
                 <div class="scelta">Scegli:</div>
                 <select name="genere" @change="filtraPerGenere(input)" v-model="input">
                     <option value="">Tutti</option>
@@ -21,9 +21,9 @@
                     <option value="Jazz">Jazz</option>
                     <option value="Metal">Metal</option>
                 </select>
-            </div>
+            </div> -->
             <div class="items">            
-                <div class="card" v-for="elemento in filtrati">
+                <div class="card" v-for="elemento in cards">
                     <div class="image"><img :src="elemento.poster"></div>
                     <div class="title">{{elemento.title}}</div>
                     <div class="author">{{elemento.author}}</div>
@@ -42,18 +42,18 @@
                             data: {
                                 apiURL: "http://localhost:8888/repo-php/php-ajax-dischi/milestone2/api.php",
                                 cards: [],
-                                input:"",
+                                // input:"",
                             },
                             created(){
                                 this.getCards();
                             },
-                            computed: {
-                                filtrati(){
-                                    return this.cards.filter( (info) => {
-                                        return info.genre.toLowerCase().includes(this.input.toLowerCase());
-                                    });
-                                }
-                            },
+                            // computed: {
+                            //     filtrati(){
+                            //         return this.cards.filter( (info) => {
+                            //             return info.genre.toLowerCase().includes(this.input.toLowerCase());
+                            //         });
+                            //     }
+                            // },
                             methods: {
                                 getCards: function(){
                                 axios
